@@ -1,0 +1,21 @@
+FROM node:22.14.0-slim
+
+EXPOSE 3000
+
+WORKDIR /app
+
+COPY ./package*.json ./
+
+RUN npm ci
+
+COPY . .
+
+ARG PORT
+ARG MONGO_URI
+ARG REDIS_URL
+
+ENV PORT=$PORT
+ENV MONGO_URI=$MONGO_URI
+ENV REDIS_URL=$REDIS_URL
+
+CMD ["npm", "run", "dev"]
