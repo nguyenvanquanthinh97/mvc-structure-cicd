@@ -8,7 +8,7 @@ cd /etc/nginx/sites-available
 sudo vim default
 
 location /api {
-  rewrite ^\/api\/(/*)$ /api/$1 break;
+  rewrite ^\/api\/(.*)$ /api/$1 break;
   proxy_pass http://localhost:3000;
   proxy_set_header Host $host;
   proxy_set_header X-Real-IP $remote_addr;
