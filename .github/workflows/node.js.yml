@@ -25,6 +25,10 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
+    - name: Run with env
+      env:
+        PORT: ${{ vars.PORT }}
+      run: echo ${{ vars.PORT }}
     - name: Install PM2 globally
       run: npm install pm2@latest -g
     - run: pm2 restart ecommerce-shop-dev
