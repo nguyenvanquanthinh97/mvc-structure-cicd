@@ -31,4 +31,9 @@ jobs:
       run: echo ${{ vars.PORT }}
     - name: Install PM2 globally
       run: npm install pm2@latest -g
-    - run: pm2 restart ecommerce-shop-dev
+    - name: run pm2 restart server
+      env:
+        PORT: ${{ vars.PORT }}
+        MONGO_URI: ${{ vars.MONGO_URI }}
+        REDIS_URL: ${{ vars.REDIS_URL}}
+      run: pm2 restart ecommerce-shop-dev --update-env
