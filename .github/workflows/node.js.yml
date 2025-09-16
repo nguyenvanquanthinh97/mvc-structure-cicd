@@ -25,4 +25,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
-    # - run: pm2 restart ecommerce-shop-dev
+    - name: Install PM2 globally
+      run: npm install pm2@latest -g
+    - run: pm2 restart ecommerce-shop-dev
