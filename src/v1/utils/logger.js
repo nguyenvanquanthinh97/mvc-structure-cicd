@@ -6,6 +6,7 @@ module.exports = createLogger({
         format.printf((i) => `${i.level}: ${[i.timestamp]}: ${i.message}`)
     ),
     transports: [
+        new transports.Console(),
         new transports.File({
             filename: "logs/info.log",
             level: "info",

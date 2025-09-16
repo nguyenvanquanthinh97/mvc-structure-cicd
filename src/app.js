@@ -5,12 +5,12 @@ const morgan = require('morgan')
 const compression = require('compression')
 
 //init dbs
-// require('./v1/databases/init.mongodb')
-// require('./v1/databases/init.redis')
+require('./v1/databases/init.mongodb')
+require('./v1/databases/init.redis')
 
 //user middleware
 app.use(helmet())
-app.use(morgan('dev'))
+app.use(morgan('combined'))
 // compress responses
 app.use(compression())
 

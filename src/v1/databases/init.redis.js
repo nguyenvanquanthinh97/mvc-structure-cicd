@@ -1,17 +1,18 @@
-const { createClient } = require('redis');
-const client= createClient({
-    url: process.env.REDIS_URL
-});
-client.ping(function (err, result) {
-    console.log(result);
-})
+const Redis = require("ioredis");
 
-client.on('connect', () => {
-    console.log('Redis client connected');
+const logger = require("../utils/logger");
+
+const redis = new Redis(process.env.REDIS_URI);
+redis.on("connect", () => {
+  logger.info("Redis connected");
 });
 
-client.on("error", (error) => {
-    console.error(error);
+redis.on("ready", () => {
+  logger.info("Redis connection is ready to use");
 });
 
-module.exports = client
+redis.on("error", (err) => {
+  logger.error("Redis connection error", err);
+});
+
+module.exports = redis;

@@ -1,17 +1,36 @@
-const mongoose = require('mongoose')
+"use strict";
+const mongoose = require("mongoose");
 
-//connect mongoose
-mongoose.connect( process.env.MONGO_URI).then( _ => console.log('Connected mongoose success!...'))
-.catch( err => console.error(`Error: connect:::`, err))
+const logger = require("../utils/logger");
+const { countConnect } = require("../helpers/check.connect");
 
-// all executed methods log output to console
-mongoose.set('debug', true)
-    
-// disable colors in debug mode
-mongoose.set('debug', { color: false })
+const connectionString = process.env.MONGO_URI
 
-// get mongodb-shell friendly output (ISODate)
-mongoose.set('debug', { shell: true })
+class Database {
+  constructor() {
+    this.connect();
+  }
 
+  connect() {
+    if (1 === 1) {
+      mongoose.set("debug", true);
+      mongoose.set("debug", { color: true });
+    }
 
-module.exports = mongoose;
+    mongoose
+      .connect(connectionString)
+      .then((_) => logger.info("MongoDB connected", countConnect()))
+      .catch((err) => logger.error("Error Connect!"));
+  }
+
+  static getInstance() {
+    if (!Database.instance) {
+      Database.instance = new Database();
+    }
+    return Database.instance;
+  }
+}
+
+const instanceMongoDB = Database.getInstance();
+
+module.exports = instanceMongoDB;
