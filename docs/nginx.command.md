@@ -24,7 +24,7 @@ sudo systemctl restart nginx
 server_name quanthinh97.com www.quanthinh97.com;
 
 location / {
-  proxy_pass http://localhost:3000;
+  proxy_pass http://localhost:8000;
   proxy_http_version 1.1;
   proxy_set_header Upgrade $http_upgrade;
   proxy_set_header Connection 'upgrade';
@@ -35,9 +35,8 @@ location / {
 
 3. add SSL to domain
 ```bash
-sudo add-apt-repository ppa:certbot/certbot
 sudo apt-get update
-sudo apt-get install python3-certbot-nginx
+sudo apt install certbot python3-certbot-nginx -y
 sudo certbot --nginx -d quanthinh97.com
 sudo certbot renew --dry-run
 sudo systemctl status certbot.timer

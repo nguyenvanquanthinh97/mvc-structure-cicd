@@ -2,7 +2,16 @@ const Redis = require("ioredis");
 
 const logger = require("../utils/logger");
 
-const redis = new Redis(process.env.REDIS_URI);
+const [host, port] = (process.env.REDIS_URL || '' ).split(':');
+
+const redis = new Redis({
+  host: host,
+  port: parseInt(port) || 6379,
+  maxRetriesPerRequest: null, // Required for BullMQ
+  retryDelayOnFailover: 100,
+  enableReadyCheck: false,
+});
+
 redis.on("connect", () => {
   logger.info("Redis connected");
 });

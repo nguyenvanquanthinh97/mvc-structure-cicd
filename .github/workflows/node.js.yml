@@ -27,7 +27,16 @@ jobs:
     - run: npm ci
     - name: run pm2 restart server
       env:
+        BACKEND_HOST: ${{ vars.BACKEND_HOST }}
+        FRONTEND_HOST: ${{ vars.FRONTEND_HOST}}
         PORT: ${{ vars.PORT }}
         MONGO_URI: ${{ vars.MONGO_URI }}
         REDIS_URL: ${{ vars.REDIS_URL}}
+        GOOGLE_CLIENT_ID: ${{ vars.GOOGLE_CLIENT_ID }}
+        GOOGLE_CLIENT_SECRET: ${{ vars.GOOGLE_CLIENT_SECRET }}
+        SESSION_SECRET: ${{ vars.SESSION_SECRET }}
+        AWS_BUCKET_NAME: ${{ vars.AWS_BUCKET_NAME}}
+        AWS_BUCKET_REGION: ${{ vars.AWS_BUCKET_REGION}}
+        AWS_BUCKET_ACCESS_KEY: ${{ vars.AWS_BUCKET_ACCESS_KEY }}
+        AWS_BUCKET_SECRET_KEY: ${{ vars.AWS_BUCKET_SECRET_KEY}}
       run: pm2 restart ecommerce-shop-dev --update-env

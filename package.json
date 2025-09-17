@@ -8,19 +8,29 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "worker": "nodemon src/v1/workers/index.js"
   },
   "keywords": [],
   "author": "anonystick <anonystick@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.890.0",
+    "axios": "^1.12.2",
+    "bullmq": "^5.58.5",
     "compression": "^1.7.4",
+    "connect-mongodb-session": "^5.0.0",
+    "cookie-session": "^2.1.1",
+    "crypto": "^1.0.1",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "express-session": "^1.18.2",
     "helmet": "^5.1.0",
     "ioredis": "^5.7.0",
+    "lodash": "^4.17.21",
     "mongoose": "^6.3.3",
     "morgan": "^1.10.0",
+    "multer": "^2.0.2",
     "nodemon": "^2.0.20",
     "winston": "^3.7.2"
   }
