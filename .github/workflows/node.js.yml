@@ -39,4 +39,7 @@ jobs:
         AWS_BUCKET_REGION: ${{ vars.AWS_BUCKET_REGION}}
         AWS_BUCKET_ACCESS_KEY: ${{ vars.AWS_BUCKET_ACCESS_KEY }}
         AWS_BUCKET_SECRET_KEY: ${{ vars.AWS_BUCKET_SECRET_KEY}}
-      run: pm2 restart ecommerce-shop-dev --update-env
+        ALLOWED_ORIGINS: ${{ vars.ALLOWED_ORIGINS}}
+      run: |
+        pm2 restart ecommerce-shop-dev --update-env
+        pm2 restart worker --update-env
